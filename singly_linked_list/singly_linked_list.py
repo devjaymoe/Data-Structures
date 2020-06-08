@@ -15,13 +15,6 @@ class Node:
         # sets this node's `next` reference to `new_next`
         self.next = new_next
 
-# basic building of linked list
-# node = Node(1)
-# node.set_next(Node(2))
-# # node.set_next(Node(3)) # overriting the set_next on node 1
-# node.get_next().set_next(Node(3))
-# node.get_next().get_next().set_next(Node(4)) # this works but is clunky
-
 class LinkedList:
     def __init__(self):
         # the first Node in the LinkedList

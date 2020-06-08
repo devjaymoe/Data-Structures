@@ -11,27 +11,6 @@ return elements in Last In First Out order.
    implementing a Stack?
 """
 
-class Stack:
-    def __init__(self):
-        self.size = 0
-        self.storage = []
-
-    def __len__(self):
-        self.size = 0
-        for e in self.storage:
-            self.size += 1
-        return self.size
-
-    def push(self, value):
-        self.storage.append(value)
-
-    def pop(self):
-        if not bool(self.storage):
-            return None
-        data = self.storage[len(self.storage) - 1]
-        self.storage.pop()
-        return data
-
 class Node:
     def __init__(self, data, next=None):
         self.data = data
@@ -73,6 +52,8 @@ class LinkedList:
             self.tail.set_next(new_node)
             # update self.tail to point to the new last Node in the linked list
             self.tail = new_node
+        
+        return self.tail.get_data
 
     def remove_from_head(self):
         # removes the Node that `self.head` is referering to and returns the
@@ -95,3 +76,74 @@ class LinkedList:
             self.head = self.head.get_next()
 
         return data
+
+# linked = LinkedList()
+# linked.add_to_tail(1)
+# print(linked.head.get_data())
+# linked.add_to_tail(2)
+# Linked List Storage
+class Stack:
+    def __init__(self):
+        self.size = 0
+        self.storage = LinkedList()
+
+    def __len__(self):
+        self.size = 0
+        tracker = self.storage.head
+        while tracker:
+            self.size += 1
+            tracker = tracker.get_next()
+        return self.size
+
+    def push(self, value):
+        self.storage.add_to_tail(value)
+
+    def pop(self):
+        # No links
+        if not self.storage.head:
+            return None
+        # One link
+        if self.storage.head is self.storage.tail:
+            one_link = self.storage.head.get_data()
+            self.storage.head = None
+            self.storage.tail = None
+            return one_link
+        # Many Links
+        old_tail = self.storage.tail
+        new_tail = self.storage.head
+        while new_tail.next != self.storage.tail:
+            new_tail = new_tail.get_next()
+        self.storage.tail = new_tail
+        self.storage.tail.next = None
+        return old_tail.get_data()
+
+stack = Stack()
+stack.push(1)
+stack.push(1)
+print('before pop', len(stack))
+stack.pop()
+print('after pop', len(stack))
+stack.pop()
+print(len(stack))
+
+# Stack with Array storage 
+# class Stack:
+#     def __init__(self):
+#         self.size = 0
+#         self.storage = []
+
+#     def __len__(self):
+#         self.size = 0
+#         for e in self.storage:
+#             self.size += 1
+#         return self.size
+
+#     def push(self, value):
+#         self.storage.append(value)
+
+#     def pop(self):
+#         if not bool(self.storage):
+#             return None
+#         data = self.storage[len(self.storage) - 1]
+#         self.storage.pop()
+#         return data
