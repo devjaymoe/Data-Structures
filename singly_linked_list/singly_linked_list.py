@@ -40,7 +40,7 @@ class LinkedList:
             # update self.tail to point to the new last Node in the linked list
             self.tail = new_node
 
-    def remove_from_head(self):
+    def remove_head(self):
         # removes the Node that `self.head` is referering to and returns the
         # Node's data
         if self.head is None:
@@ -61,3 +61,21 @@ class LinkedList:
             self.head = self.head.get_next()
 
         return data
+
+    def contains(self, value):
+        if not self.head:
+            return None
+        # go though list
+        if self.head.data == value:
+            return self.head.data
+        truthy_tracker = self.head.next
+        while truthy_tracker:
+            # check if value at node is value
+            if value == truthy_tracker.data:
+            # if it is stop list
+                return truthy_tracker.data
+            truthy_tracker = truthy_tracker.next
+        # return node at value
+
+    def get_max(self):
+        pass

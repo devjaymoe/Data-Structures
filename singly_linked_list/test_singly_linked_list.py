@@ -7,11 +7,11 @@ class LinkedListTests(unittest.TestCase):
 
     def test_add_to_tail(self):
         self.list.add_to_tail(1)
-        self.assertEqual(self.list.tail.value, 1)
-        self.assertEqual(self.list.head.value, 1)
+        self.assertEqual(self.list.tail.data, 1)
+        self.assertEqual(self.list.head.data, 1)
         self.list.add_to_tail(2)
-        self.assertEqual(self.list.tail.value, 2)
-        self.assertEqual(self.list.head.value, 1)
+        self.assertEqual(self.list.tail.data, 2)
+        self.assertEqual(self.list.head.data, 1)
 
     def test_contains(self):
         self.list.add_to_tail(1)
