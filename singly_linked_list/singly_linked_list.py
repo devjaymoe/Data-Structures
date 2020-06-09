@@ -40,6 +40,33 @@ class LinkedList:
             # update self.tail to point to the new last Node in the linked list
             self.tail = new_node
 
+    def remove_tail(self):
+        if self.tail is None:
+            return None
+        # save the tail Node's data
+        data = self.tail.get_value()
+        # both head and tail refer to the same Node 
+        # there's only one Node in the linked list 
+        if self.head is self.tail:
+            # set both to be None
+            self.head = None
+            self.tail = None
+        else:
+            # in order to update `self.tail` to point to the
+            # the Node _before_ the tail, we need to traverse
+            # the whole linked list starting from the head,
+            # because we cannot move backwards from any one
+            # Node, so we have to start from the beginning
+            current = self.head
+            # traverse until we get to the Node right 
+            # before the tail Node 
+            while current.get_next() != self.tail:
+                current = current.get_next()
+            # `current` is now pointing at the Node right
+            # before the tail Node
+            self.tail = current
+        return data
+
     def remove_head(self):
         # removes the Node that `self.head` is referering to and returns the
         # Node's data
@@ -78,4 +105,12 @@ class LinkedList:
         # return node at value
 
     def get_max(self):
-        pass
+        if not self.head:
+            return None
+        max = self.head.data
+        tracker = self.head
+        while tracker:
+            if tracker.data > max:
+                max = tracker.data
+            tracker = tracker.next
+        return max
