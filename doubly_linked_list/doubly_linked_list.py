@@ -87,8 +87,9 @@ class DoublyLinkedList:
     def add_to_tail(self, value):
         # head and tail are both None
         if not self.head and not self.tail:
-            self.head = ListNode(value)
-            self.tail = ListNode(value)
+            new_node = ListNode(value)
+            self.head = new_node
+            self.tail = new_node
             self.length += 1
             return self.tail
         # there is a tail
@@ -108,10 +109,11 @@ class DoublyLinkedList:
     def remove_from_tail(self):
         # head and tail are the same
         if self.head == self.tail:
+            old_tail = self.tail
             self.head = None
             self.tail = None
             self.length -= 1
-            return None
+            return old_tail.value
         # there is a tail
         elif self.tail:
             # delete the tail
